@@ -10,33 +10,31 @@ using System.Windows.Forms;
 using StockManagementSystemAPP.Models;
 using StockManagementSystemAPP.BLL;
 
-
 namespace StockManagementSystemAPP
 {
-    public partial class SetupCategory : Form
+    public partial class SetupCompany : Form
     {
-
         StockManager _stockManager = new StockManager();
-        private Category category;
+        private Company company;
 
-        public SetupCategory()
+        public SetupCompany()
         {
             InitializeComponent();
-            category = new Category();
+            company = new Company();
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (SaveButton.Text == "Update")
             {
-                category.Name = nameTextBox.Text;
+                company.Name = nameTextBox.Text;
 
                 int i;
-                i = displayCategory.SelectedCells[0].RowIndex;
-                category.oldName = displayCategory.Rows[i].Cells[1].Value.ToString();
+                i = displayCompany.SelectedCells[0].RowIndex;
+                company.oldName = displayCompany.Rows[i].Cells[1].Value.ToString();
 
                 int isExecuted;
-                isExecuted = _stockManager.UpdateCategory(category);
+                isExecuted = _stockManager.UpdateCompany(company);
 
                 if (isExecuted > 0)
                 {
@@ -53,10 +51,10 @@ namespace StockManagementSystemAPP
 
             else if (SaveButton.Text == "Save")
             {
-                category.Name = nameTextBox.Text;
+                company.Name = nameTextBox.Text;
 
                 int isExecuted;
-                isExecuted = _stockManager.InsertCategory(category);
+                isExecuted = _stockManager.InsertCompany(company);
 
                 if (isExecuted > 0)
                 {
@@ -70,35 +68,35 @@ namespace StockManagementSystemAPP
                 nameTextBox.Clear();
             }
 
-            displayCategory.DataSource = _stockManager.ShowCategory();
+            displayCompany.DataSource = _stockManager.ShowCompany();
         }
 
-        private void SetupCategory_Load(object sender, EventArgs e)
+        private void SetupCompany_Load(object sender, EventArgs e)
         {
-            displayCategory.DataSource = _stockManager.ShowCategory();
+            displayCompany.DataSource = _stockManager.ShowCompany();
         }
 
-        private void displayCategory_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void displayCompany_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (displayCategory.SelectedRows.Count > 0)
+            if (displayCompany.SelectedRows.Count > 0)
             {
-                nameTextBox.Text = displayCategory.SelectedRows[1].Cells[0].Value.ToString();
+                nameTextBox.Text = displayCompany.SelectedRows[0].Cells[1].Value.ToString();
             }
 
-            if (displayCategory.SelectedCells.Count > 0)
+            if (displayCompany.SelectedCells.Count > 0)
             {
                 int i;
-                i = displayCategory.SelectedCells[0].RowIndex;
-                nameTextBox.Text = displayCategory.Rows[i].Cells[1].Value.ToString();
+                i = displayCompany.SelectedCells[0].RowIndex;
+                nameTextBox.Text = displayCompany.Rows[i].Cells[1].Value.ToString();
 
             }
 
             SaveButton.Text = "Update";
         }
 
-        private void displayCategory_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void displayCompany_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            displayCategory.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
+            displayCompany.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
         }
     }
 }

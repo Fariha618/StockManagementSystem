@@ -16,7 +16,8 @@ namespace StockManagementSystemAPP
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SetupCategory());
+            //Application.Run(new SetupCategory());
+            Application.Run(new SetupCompany());
         }
     }
 }
