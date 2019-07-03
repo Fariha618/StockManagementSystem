@@ -43,5 +43,34 @@ namespace StockManagementSystemAPP.BLL
             return _stockRepository.ShowCompany();
         }
 
+        public DataTable LoadCompany()
+        {
+            return _stockRepository.LoadCompany();
+        }
+
+        public DataTable LoadCategory()
+        {
+            return _stockRepository.LoadCategory();
+        }
+
+        public int InsertItem(Item item)
+        {
+            return _stockRepository.InsertItem(item);
+        }
+
+        public int UpdateItem(Item item)
+        {
+            return _stockRepository.UpdateItem(item);
+        }
+
+        public DataTable ShowItem()
+        {
+            return _stockRepository.ShowItem();
+        }
+
+        public DataTable LoadItem()
+        {
+            return _stockRepository.LoadItem();
+        }
     }
 }

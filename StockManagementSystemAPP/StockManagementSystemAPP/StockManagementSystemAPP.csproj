@@ -49,6 +49,7 @@
     <Compile Include="BLL\StockManager.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Item.cs" />
     <Compile Include="Repository\StockRepository.cs" />
     <Compile Include="SetupCategory.cs">
       <SubType>Form</SubType>
@@ -63,6 +64,12 @@
     </Compile>
     <Compile Include="SetupCompany.Designer.cs">
       <DependentUpon>SetupCompany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SetupItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetupItem.Designer.cs">
+      <DependentUpon>SetupItem.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -79,8 +86,12 @@
     <EmbeddedResource Include="SetupCompany.resx">
       <DependentUpon>SetupCompany.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SetupItem.resx">
+      <DependentUpon>SetupItem.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\DataSources\StockManagementSystemAPP.Models.Category.datasource" />
     <None Include="Properties\DataSources\StockManagementSystemAPP.Models.Company.datasource" />
+    <None Include="Properties\DataSources\StockManagementSystemAPP.Models.Item.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
