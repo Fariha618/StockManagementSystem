@@ -178,5 +178,10 @@ namespace StockManagementSystemAPP
 
             displayStockOut.Columns.Clear();
         }
+
+        private void displayStockOut_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            displayStockOut.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
+        }
     }
 }

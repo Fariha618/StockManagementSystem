@@ -184,6 +184,7 @@
             this.displayStockOut.Name = "displayStockOut";
             this.displayStockOut.Size = new System.Drawing.Size(455, 150);
             this.displayStockOut.TabIndex = 12;
+            this.displayStockOut.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.displayStockOut_RowPostPaint);
             // 
             // AddButton
             // 
