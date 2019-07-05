@@ -1,3 +1,5 @@
+------STOCK MANAGEMENT SYSTEM APP-------
+
 CREATE DATABASE StockDB
 
 USE StockDB
@@ -42,3 +44,58 @@ LEFT JOIN Company AS co ON co.ID = i.company_ID
 LEFT JOIN Category AS ca ON ca.ID = i.category_ID
 
 SELECT * FROM ItemView
+
+
+-- Stock In Table --
+
+
+CREATE TABLE StockIn
+(
+ID int IDENTITY(1,1),
+item_ID int,
+available_quantity int,
+stockin_quantity int,
+Date VARCHAR(100)
+)
+
+SELECT * FROM StockIn
+
+INSERT INTO StockIn (item_ID, stockin_quantity,Date) 
+VALUES (1,120, CONVERT(VARCHAR(10), getdate(), 103))
+
+
+CREATE VIEW StockInView
+AS
+SELECT Name AS Item, Date, stockin_quantity, available_quantity  FROM StockIn  As s
+LEFT JOIN Item AS i ON i.ID = s.item_ID 
+
+SELECT * FROM StockInView
+
+
+
+-- Stock Out Table --
+
+CREATE TABLE StockOut
+(
+ID int IDENTITY(1,1),
+item_ID int,
+stockout_quantity int,
+stockout_type int,
+Date VARCHAR(300)
+
+)
+
+SELECT * FROM StockOut
+
+
+INSERT INTO StockOut (item_ID, stockout_quantity, stockout_type) 
+VALUES (1, 60, 0)
+
+
+
+---Available Quantity --
+
+SELECT ISNULL((SELECT SUM(stockin_quantity) FROM StockIn WHERE item_ID = 2),0) - ISNULL((SELECT stockout_quantity FROM StockOut WHERE item_ID = 2),0) 
+
+
+

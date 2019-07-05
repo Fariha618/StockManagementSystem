@@ -72,5 +72,55 @@ namespace StockManagementSystemAPP.BLL
         {
             return _stockRepository.LoadItem();
         }
+
+        public DataTable GetCompany(StockIn stockIn)
+        {
+            return _stockRepository.GetCompany(stockIn);
+        }
+
+        public DataTable GetCategory(StockIn stockIn)
+        {
+            return _stockRepository.GetCategory(stockIn);
+        }
+
+        public int GetReorderLevel(StockIn stockIn)
+        {
+            return _stockRepository.GetReorderLevel(stockIn);
+        }
+
+        public int GetAvailableQuantity(StockIn stockIn, StockOut stockOut)
+        {
+            return _stockRepository.GetAvailableQuantity(stockIn, stockOut);
+        }
+
+        public int InsertStockIn(StockIn stockIn)
+        {
+            return _stockRepository.InsertStockIn(stockIn);
+        }
+
+        public DataTable ShowStockIn()
+        {
+            return _stockRepository.ShowStockIn();
+        }
+
+        public int UpdateStockIn(StockIn stockIn)
+        {
+            return _stockRepository.UpdateStockIn(stockIn);
+        }
+
+        public int InsertSell(StockOut stockOut)
+        {
+            return _stockRepository.InsertSell(stockOut);
+        }
+
+        public int InsertLost(StockOut stockOut)
+        {
+            return _stockRepository.InsertLost(stockOut);
+        }
+
+        public int InsertDamage(StockOut stockOut)
+        {
+            return _stockRepository.InsertDamage(stockOut);
+        }
     }
 }

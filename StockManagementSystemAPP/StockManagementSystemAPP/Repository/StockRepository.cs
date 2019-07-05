@@ -240,5 +240,202 @@ namespace StockManagementSystemAPP.Repository
 
             return dataTable;
         }
+
+        public DataTable GetCompany(StockIn stockIn)
+        {
+
+            sqlConnection = new SqlConnection(connectionString);
+            commandString = @"SELECT c.Name FROM Item AS i LEFT JOIN Company AS c ON c.ID = i.company_ID WHERE i.ID = " + stockIn.item_ID + " ";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            sqlConnection.Open();
+
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
+            DataTable dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+
+            sqlConnection.Close();
+
+            return dataTable;
+        }
+
+        public DataTable GetCategory(StockIn stockIn)
+        {
+
+            sqlConnection = new SqlConnection(connectionString);
+            commandString = @"SELECT c.Name FROM Item AS i LEFT JOIN Category AS c ON c.ID = i.category_ID WHERE i.ID = " + stockIn.item_ID + " ";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            sqlConnection.Open();
+
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
+            DataTable dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+
+            sqlConnection.Close();
+
+            return dataTable;
+        }
+
+        public int GetReorderLevel(StockIn stockIn)
+        {
+
+            sqlConnection = new SqlConnection(connectionString);
+
+            commandString = @"SELECT * FROM Item WHERE ID = " + stockIn.item_ID + " ";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            sqlConnection.Open();
+
+
+            //SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
+            //DataTable dataTable = new DataTable();
+            //dataAdapter.Fill(dataTable);
+            //string reorderLevel = "";
+
+            //foreach (DataRow dc in dataTable.Rows)
+            //{
+            //    reorderLevel = dataTable.Rows[0][4].ToString();
+            //}
+            SqlDataReader dr = sqlCommand.ExecuteReader();
+            dr.Read();
+
+            int reorderLevel = dr.GetInt32(4);
+
+            sqlConnection.Close();
+
+            return reorderLevel;
+        }
+
+        public int GetAvailableQuantity(StockIn stockIn, StockOut stockOut)
+        {
+            sqlConnection = new SqlConnection(connectionString);
+
+            commandString = @"SELECT ISNULL((SELECT SUM(stockin_quantity) FROM StockIn WHERE item_ID = " + stockIn.item_ID+ "),0) - ISNULL((SELECT SUM(stockout_quantity) FROM StockOut WHERE item_ID = " + stockIn.item_ID+"),0) ";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            sqlConnection.Open();           
+
+            SqlDataReader dr = sqlCommand.ExecuteReader();
+            dr.Read();
+
+            int availableQuantity = dr.GetInt32(0);
+
+            sqlConnection.Close();
+            
+            return availableQuantity;
+        }
+
+        public int InsertStockIn(StockIn stockIn)
+        {
+
+            sqlConnection = new SqlConnection(connectionString);
+
+            commandString = @"INSERT INTO StockIn (item_ID, available_quantity, stockin_quantity, Date) VALUES (" + stockIn.item_ID + " , " + stockIn.available_quantity + " , " + stockIn.stockin_quantity + " , CONVERT(VARCHAR(10), getdate(), 103))";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            sqlConnection.Open();
+
+            int isExecuted;
+
+            isExecuted = sqlCommand.ExecuteNonQuery();
+
+            sqlConnection.Close();
+
+            return isExecuted;
+        }
+
+        public DataTable ShowStockIn()
+        {
+
+            sqlConnection = new SqlConnection(connectionString);
+            commandString = @"SELECT * FROM StockInView";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            sqlConnection.Open();
+
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
+            DataTable dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+
+            sqlConnection.Close();
+
+            return dataTable;
+        }
+
+        public int UpdateStockIn(StockIn stockIn)
+        {
+
+            sqlConnection = new SqlConnection(connectionString);
+
+            commandString = @"Update StockIn SET item_ID = " + stockIn.item_ID + ", available_quantity = " + stockIn.available_quantity + ", stockin_quantity = " + stockIn.stockin_quantity + ", Date = CONVERT(VARCHAR(10), getdate(), 103) WHERE item_ID = " + stockIn.oldItem_ID + " ";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            sqlConnection.Open();
+
+            int isExecuted;
+
+            isExecuted = sqlCommand.ExecuteNonQuery();
+
+            sqlConnection.Close();
+
+            return isExecuted;
+        }
+
+        public int InsertSell(StockOut stockOut)
+        {
+            sqlConnection = new SqlConnection(connectionString);
+
+            commandString = @"INSERT INTO StockOut (item_ID, stockout_quantity, stockout_type, Date) VALUES (" + stockOut.item_ID + " , " + stockOut.stockout_quantity + " , 0 , CONVERT(VARCHAR(10), getdate(), 103))";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            sqlConnection.Open();
+
+            int isExecuted;
+
+            isExecuted = sqlCommand.ExecuteNonQuery();
+
+            sqlConnection.Close();
+
+            return isExecuted;
+        }
+
+        public int InsertLost(StockOut stockOut)
+        {
+            sqlConnection = new SqlConnection(connectionString);
+
+            commandString = @"INSERT INTO StockOut (item_ID, stockout_quantity, stockout_type, Date) VALUES (" + stockOut.item_ID + " , " + stockOut.stockout_quantity + " , 1 , CONVERT(VARCHAR(10), getdate(), 103))";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            sqlConnection.Open();
+
+            int isExecuted;
+
+            isExecuted = sqlCommand.ExecuteNonQuery();
+
+            sqlConnection.Close();
+
+            return isExecuted;
+        }
+
+        public int InsertDamage(StockOut stockOut)
+        {
+            sqlConnection = new SqlConnection(connectionString);
+
+            commandString = @"INSERT INTO StockOut (item_ID, stockout_quantity, stockout_type, Date) VALUES (" + stockOut.item_ID + " , " + stockOut.stockout_quantity + " , 2 , CONVERT(VARCHAR(10), getdate(), 103))";
+            sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            sqlConnection.Open();
+
+            int isExecuted;
+
+            isExecuted = sqlCommand.ExecuteNonQuery();
+
+            sqlConnection.Close();
+
+            return isExecuted;
+        }
+
+
     }
 }
