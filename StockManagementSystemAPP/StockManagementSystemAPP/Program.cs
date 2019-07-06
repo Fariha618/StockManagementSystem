@@ -22,6 +22,7 @@ namespace StockManagementSystemAPP
             //Application.Run(new StockInUi());
             //Application.Run(new StockOutUi());
             //Application.Run(new ItemSummaryUi());
+
         }
     }
 }
