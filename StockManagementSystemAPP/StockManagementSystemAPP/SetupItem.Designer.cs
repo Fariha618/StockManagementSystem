@@ -47,8 +47,8 @@
             this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.reorderLevelTextBox = new System.Windows.Forms.TextBox();
-            this.errorLabel = new System.Windows.Forms.Label();
-            this.reorderLabel = new System.Windows.Forms.Label();
+            this.errorLabel2 = new System.Windows.Forms.Label();
+            this.errorLabel3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayItem)).BeginInit();
@@ -181,6 +181,7 @@
             // itemBindingSource
             // 
             this.itemBindingSource.DataSource = typeof(StockManagementSystemAPP.Models.Item);
+            this.itemBindingSource.CurrentChanged += new System.EventHandler(this.itemBindingSource_CurrentChanged);
             // 
             // nameTextBox
             // 
@@ -195,34 +196,31 @@
             this.reorderLevelTextBox.Name = "reorderLevelTextBox";
             this.reorderLevelTextBox.Size = new System.Drawing.Size(203, 20);
             this.reorderLevelTextBox.TabIndex = 9;
+            this.reorderLevelTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.reorderLevelTextBox_KeyPress);
             // 
-            // errorLabel
+            // errorLabel2
             // 
-            this.errorLabel.AutoSize = true;
-            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(542, 111);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(0, 15);
-            this.errorLabel.TabIndex = 10;
+            this.errorLabel2.AutoSize = true;
+            this.errorLabel2.Location = new System.Drawing.Point(533, 111);
+            this.errorLabel2.Name = "errorLabel2";
+            this.errorLabel2.Size = new System.Drawing.Size(0, 13);
+            this.errorLabel2.TabIndex = 10;
             // 
-            // reorderLabel
+            // errorLabel3
             // 
-            this.reorderLabel.AutoSize = true;
-            this.reorderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reorderLabel.ForeColor = System.Drawing.Color.Red;
-            this.reorderLabel.Location = new System.Drawing.Point(542, 147);
-            this.reorderLabel.Name = "reorderLabel";
-            this.reorderLabel.Size = new System.Drawing.Size(0, 15);
-            this.reorderLabel.TabIndex = 11;
+            this.errorLabel3.AutoSize = true;
+            this.errorLabel3.Location = new System.Drawing.Point(533, 147);
+            this.errorLabel3.Name = "errorLabel3";
+            this.errorLabel3.Size = new System.Drawing.Size(0, 13);
+            this.errorLabel3.TabIndex = 10;
             // 
             // SetupItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.reorderLabel);
-            this.Controls.Add(this.errorLabel);
+            this.Controls.Add(this.errorLabel3);
+            this.Controls.Add(this.errorLabel2);
             this.Controls.Add(this.reorderLevelTextBox);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.displayItem);
@@ -265,7 +263,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn reorder_level;
         private System.Windows.Forms.BindingSource itemBindingSource;
-        private System.Windows.Forms.Label errorLabel;
-        private System.Windows.Forms.Label reorderLabel;
+        private System.Windows.Forms.Label errorLabel2;
+        private System.Windows.Forms.Label errorLabel3;
     }
 }

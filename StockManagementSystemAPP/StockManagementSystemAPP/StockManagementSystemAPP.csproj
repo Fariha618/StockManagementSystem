@@ -47,19 +47,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\StockManager.cs" />
-    <Compile Include="ItemSummaryUi.cs">
+    <Compile Include="Index.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ItemSummaryUi.Designer.cs">
-      <DependentUpon>ItemSummaryUi.cs</DependentUpon>
+    <Compile Include="Index.Designer.cs">
+      <DependentUpon>Index.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Item.cs" />
-    <Compile Include="Models\ItemSummary.cs" />
+    <Compile Include="Models\Report.cs" />
     <Compile Include="Models\StockIn.cs" />
     <Compile Include="Models\StockOut.cs" />
+    <Compile Include="Reports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports.Designer.cs">
+      <DependentUpon>Reports.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repository\StockRepository.cs" />
+    <Compile Include="SearchandViewItemSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchandViewItemSummary.Designer.cs">
+      <DependentUpon>SearchandViewItemSummary.cs</DependentUpon>
+    </Compile>
     <Compile Include="SetupCategory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,14 +98,8 @@
     <Compile Include="StockInUi.Designer.cs">
       <DependentUpon>StockInUi.cs</DependentUpon>
     </Compile>
-    <Compile Include="StockOutUi.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StockOutUi.Designer.cs">
-      <DependentUpon>StockOutUi.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="ItemSummaryUi.resx">
-      <DependentUpon>ItemSummaryUi.cs</DependentUpon>
+    <EmbeddedResource Include="Index.resx">
+      <DependentUpon>Index.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -103,7 +109,14 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reports.resx">
+      <DependentUpon>Reports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchandViewItemSummary.resx">
+      <DependentUpon>SearchandViewItemSummary.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SetupCategory.resx">
       <DependentUpon>SetupCategory.cs</DependentUpon>
     </EmbeddedResource>
@@ -116,14 +129,12 @@
     <EmbeddedResource Include="StockInUi.resx">
       <DependentUpon>StockInUi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StockOutUi.resx">
-      <DependentUpon>StockOutUi.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\DataSources\StockManagementSystemAPP.Models.Category.datasource" />
     <None Include="Properties\DataSources\StockManagementSystemAPP.Models.Company.datasource" />
     <None Include="Properties\DataSources\StockManagementSystemAPP.Models.Item.datasource" />
-    <None Include="Properties\DataSources\StockManagementSystemAPP.Models.ItemSummary.datasource" />
+    <None Include="Properties\DataSources\StockManagementSystemAPP.Models.Report.datasource" />
     <None Include="Properties\DataSources\StockManagementSystemAPP.Models.StockIn.datasource" />
+    <None Include="Properties\DataSources\StockManagementSystemAPP.Models.StockOut.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -137,6 +148,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

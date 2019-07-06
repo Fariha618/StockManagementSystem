@@ -16,7 +16,7 @@ namespace StockManagementSystemAPP.Models
         public string Date { get; set; }
 
         public string Item { get; set; }
-        public int oldItem_ID;
+        public string StockOut { get; set; }
 
 
     }
