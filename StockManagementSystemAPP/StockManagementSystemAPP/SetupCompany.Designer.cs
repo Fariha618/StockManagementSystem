@@ -36,7 +36,7 @@
             this.companyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.errorLabel1 = new System.Windows.Forms.Label();
+            this.errorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.displayCompany)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -97,26 +97,26 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Name";
             // 
-            // errorLabel1
+            // errorLabel
             // 
-            this.errorLabel1.AutoSize = true;
-            this.errorLabel1.Location = new System.Drawing.Point(456, 64);
-            this.errorLabel1.Name = "errorLabel1";
-            this.errorLabel1.Size = new System.Drawing.Size(0, 13);
-            this.errorLabel1.TabIndex = 4;
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(456, 61);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(0, 15);
+            this.errorLabel.TabIndex = 4;
             // 
             // SetupCompany
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-    
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.errorLabel1);
+            this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.displayCompany);
             this.Controls.Add(this.SaveButton);
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "SetupCompany";
             this.Text = "Setup Company";
             this.Load += new System.EventHandler(this.SetupCompany_Load);
@@ -136,6 +136,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SI;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource companyBindingSource;
-        private System.Windows.Forms.Label errorLabel1;
+        private System.Windows.Forms.Label errorLabel;
     }
 }

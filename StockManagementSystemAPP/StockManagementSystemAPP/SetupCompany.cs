@@ -27,18 +27,30 @@ namespace StockManagementSystemAPP
         {
             try
             {
+
                 if (SaveButton.Text == "Update")
                 {
                     company.Name = nameTextBox.Text;
+
                     if (String.IsNullOrEmpty(nameTextBox.Text))
                     {
-                        errorLabel1.Text = "Name Field is Empty!";
-                        nameTextBox.Focus();
-                        
+                        errorLabel.Text = "Name Field Can Not Be Empty!";
+
+                        nameTextBox.Clear();
+                        SaveButton.Text = "Save";
+
                         return;
                     }
+                    errorLabel.Text = "";
 
-                    errorLabel1.Text = "";
+                    if (_stockManager.IsExistCompany(nameTextBox.Text))
+                    {
+                        errorLabel.Text = "Company Already Exist!";
+
+                        nameTextBox.Clear();
+                        SaveButton.Text = "Save";
+                        return;
+                    }
 
                     int i;
                     i = displayCompany.SelectedCells[0].RowIndex;
@@ -66,20 +78,19 @@ namespace StockManagementSystemAPP
 
                     if (String.IsNullOrEmpty(nameTextBox.Text))
                     {
-                        errorLabel1.Text = "Name Field is Empty!";
-                       
+                        errorLabel.Text = "Name Field Can Not Be Empty!";
+
                         nameTextBox.Clear();
-                        
                         return;
                     }
-                    errorLabel1.Text = "";
+
+                    errorLabel.Text = "";
 
                     if (_stockManager.IsExistCompany(nameTextBox.Text))
                     {
-                        MessageBox.Show("Company Already Exist!");
+                        errorLabel.Text = "Company Already Exist!";
 
                         nameTextBox.Clear();
-                        nameTextBox.Focus();
                         return;
                     }
 
@@ -100,11 +111,11 @@ namespace StockManagementSystemAPP
 
                 displayCompany.DataSource = _stockManager.ShowCompany();
             }
+
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
-           
         }
 
         private void SetupCompany_Load(object sender, EventArgs e)

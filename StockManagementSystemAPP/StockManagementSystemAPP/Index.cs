@@ -46,8 +46,8 @@ namespace StockManagementSystemAPP
 
         private void seachAndViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SearchandViewItemSummary searchandViewItemSummary=new SearchandViewItemSummary();
-            searchandViewItemSummary.Show();
+            ItemSummaryUi itemSummaryUi=new ItemSummaryUi();
+            itemSummaryUi.Show();
         }
 
         private void reportsToolStripMenuItem_Click(object sender, EventArgs e)

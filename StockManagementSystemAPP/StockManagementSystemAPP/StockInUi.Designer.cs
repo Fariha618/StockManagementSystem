@@ -46,11 +46,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
             this.displayStockIn = new System.Windows.Forms.DataGridView();
+            this.SI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.availablequantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stockinquantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stockin_quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.editLink = new System.Windows.Forms.DataGridViewLinkColumn();
             this.stockInBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.stockInLabel = new System.Windows.Forms.Label();
+            this.itemLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
@@ -191,60 +194,81 @@
             // 
             // displayStockIn
             // 
-            this.displayStockIn.AllowUserToAddRows = false;
-            this.displayStockIn.AllowUserToDeleteRows = false;
             this.displayStockIn.AutoGenerateColumns = false;
             this.displayStockIn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.displayStockIn.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SI,
             this.itemDataGridViewTextBoxColumn,
-            this.availablequantityDataGridViewTextBoxColumn,
-            this.stockinquantityDataGridViewTextBoxColumn,
-            this.dateDataGridViewTextBoxColumn});
+            this.dateDataGridViewTextBoxColumn,
+            this.stockin_quantity,
+            this.editLink});
             this.displayStockIn.DataSource = this.stockInBindingSource;
             this.displayStockIn.Location = new System.Drawing.Point(123, 291);
             this.displayStockIn.Name = "displayStockIn";
-            this.displayStockIn.ReadOnly = true;
-            this.displayStockIn.Size = new System.Drawing.Size(443, 150);
+            this.displayStockIn.Size = new System.Drawing.Size(541, 206);
             this.displayStockIn.TabIndex = 13;
+            this.displayStockIn.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.displayStockIn_CellContentClick);
+            this.displayStockIn.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.displayStockIn_RowPostPaint);
+            // 
+            // SI
+            // 
+            this.SI.HeaderText = "SI";
+            this.SI.Name = "SI";
             // 
             // itemDataGridViewTextBoxColumn
             // 
             this.itemDataGridViewTextBoxColumn.DataPropertyName = "Item";
             this.itemDataGridViewTextBoxColumn.HeaderText = "Item";
             this.itemDataGridViewTextBoxColumn.Name = "itemDataGridViewTextBoxColumn";
-            this.itemDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // availablequantityDataGridViewTextBoxColumn
-            // 
-            this.availablequantityDataGridViewTextBoxColumn.DataPropertyName = "available_quantity";
-            this.availablequantityDataGridViewTextBoxColumn.HeaderText = "available_quantity";
-            this.availablequantityDataGridViewTextBoxColumn.Name = "availablequantityDataGridViewTextBoxColumn";
-            this.availablequantityDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // stockinquantityDataGridViewTextBoxColumn
-            // 
-            this.stockinquantityDataGridViewTextBoxColumn.DataPropertyName = "stockin_quantity";
-            this.stockinquantityDataGridViewTextBoxColumn.HeaderText = "stockin_quantity";
-            this.stockinquantityDataGridViewTextBoxColumn.Name = "stockinquantityDataGridViewTextBoxColumn";
-            this.stockinquantityDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // dateDataGridViewTextBoxColumn
             // 
             this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
             this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
             this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // stockin_quantity
+            // 
+            this.stockin_quantity.DataPropertyName = "stockin_quantity";
+            this.stockin_quantity.HeaderText = "Quantity";
+            this.stockin_quantity.Name = "stockin_quantity";
+            // 
+            // editLink
+            // 
+            this.editLink.HeaderText = "Action";
+            this.editLink.Name = "editLink";
             // 
             // stockInBindingSource
             // 
             this.stockInBindingSource.DataSource = typeof(StockManagementSystemAPP.Models.StockIn);
             // 
+            // stockInLabel
+            // 
+            this.stockInLabel.AutoSize = true;
+            this.stockInLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stockInLabel.ForeColor = System.Drawing.Color.Red;
+            this.stockInLabel.Location = new System.Drawing.Point(524, 221);
+            this.stockInLabel.Name = "stockInLabel";
+            this.stockInLabel.Size = new System.Drawing.Size(0, 15);
+            this.stockInLabel.TabIndex = 14;
+            // 
+            // itemLabel
+            // 
+            this.itemLabel.AutoSize = true;
+            this.itemLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.itemLabel.ForeColor = System.Drawing.Color.Red;
+            this.itemLabel.Location = new System.Drawing.Point(524, 110);
+            this.itemLabel.Name = "itemLabel";
+            this.itemLabel.Size = new System.Drawing.Size(0, 15);
+            this.itemLabel.TabIndex = 15;
+            // 
             // StockInUi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-           
             this.ClientSize = new System.Drawing.Size(800, 509);
+            this.Controls.Add(this.itemLabel);
+            this.Controls.Add(this.stockInLabel);
             this.Controls.Add(this.displayStockIn);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label6);
@@ -260,6 +284,7 @@
             this.Controls.Add(this.categoryComboBox);
             this.Controls.Add(this.companyComboBox);
             this.Name = "StockInUi";
+            this.Text = "Stock In";
             this.Load += new System.EventHandler(this.StockInUi_Load);
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
@@ -290,10 +315,13 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.DataGridView displayStockIn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn itemDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn availablequantityDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stockinquantityDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource stockInBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SI;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stockin_quantity;
+        private System.Windows.Forms.DataGridViewLinkColumn editLink;
+        private System.Windows.Forms.Label stockInLabel;
+        private System.Windows.Forms.Label itemLabel;
     }
 }

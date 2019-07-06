@@ -29,22 +29,33 @@ namespace StockManagementSystemAPP
         {
             try
             {
+
                 if (SaveButton.Text == "Update")
                 {
                     category.Name = nameTextBox.Text;
 
                     if (String.IsNullOrEmpty(nameTextBox.Text))
                     {
-                        errorLebel.Text = "Name Field is Empty!";
+                        errorLabel.Text = "Name Field Can Not Be Empty!";
+                        SaveButton.Text = "Save";
                         return;
                     }
 
-                    errorLebel.Text = "";
+                    errorLabel.Text = "";
+
+                    if (_stockManager.IsExistCategory(nameTextBox.Text))
+                    {
+                        errorLabel.Text = "Category Already Exist!";
+
+                        nameTextBox.Focus();
+                        nameTextBox.Clear();
+                        SaveButton.Text = "Save";
+                        return;
+                    }
 
                     int i;
                     i = displayCategory.SelectedCells[0].RowIndex;
                     category.oldName = displayCategory.Rows[i].Cells[1].Value.ToString();
-
 
                     int isExecuted;
                     isExecuted = _stockManager.UpdateCategory(category);
@@ -57,9 +68,8 @@ namespace StockManagementSystemAPP
                     {
                         MessageBox.Show("Not Updated");
                     }
-                    if (String.IsNullOrEmpty(nameTextBox.Text))
 
-                        nameTextBox.Clear();
+                    nameTextBox.Clear();
                     SaveButton.Text = "Save";
                 }
 
@@ -69,21 +79,18 @@ namespace StockManagementSystemAPP
 
                     if (String.IsNullOrEmpty(nameTextBox.Text))
                     {
-                        errorLebel.Text = "Name Field is Empty!";
+                        errorLabel.Text = "Name Field Can Not Be Empty!";
                         return;
                     }
 
-                    errorLebel.Text = "";
+                    errorLabel.Text = "";
 
                     if (_stockManager.IsExistCategory(nameTextBox.Text))
                     {
-                        MessageBox.Show("CategoryAlready Exist!");
-
-                        nameTextBox.Focus();
+                        errorLabel.Text = "Category Already Exist!";
                         nameTextBox.Clear();
                         return;
                     }
-
 
                     int isExecuted;
                     isExecuted = _stockManager.InsertCategory(category);
@@ -97,18 +104,16 @@ namespace StockManagementSystemAPP
                         MessageBox.Show("Not Saved");
                     }
 
-
-
                     nameTextBox.Clear();
                 }
 
                 displayCategory.DataSource = _stockManager.ShowCategory();
             }
+
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
-           
         }
 
         private void SetupCategory_Load(object sender, EventArgs e)
@@ -137,11 +142,6 @@ namespace StockManagementSystemAPP
         private void displayCategory_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             displayCategory.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
-        }
-
-        private void CencelButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

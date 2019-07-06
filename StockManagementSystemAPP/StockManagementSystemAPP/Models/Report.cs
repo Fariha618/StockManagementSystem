@@ -14,6 +14,5 @@ namespace StockManagementSystemAPP.Models
         public string fromDate { get; set; }
         public string toDate { get; set; }
         public int action { get; set; }
-
     }
 }

@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using StockManagementSystemAPP.Models;
 using StockManagementSystemAPP.BLL;
-using System.Text.RegularExpressions;
 
 namespace StockManagementSystemAPP
 {
@@ -40,23 +39,40 @@ namespace StockManagementSystemAPP
                     item.company_ID = Convert.ToInt32(companyComboBox.SelectedValue);
                     item.category_ID = Convert.ToInt32(categoryComboBox.SelectedValue);
                     item.Name = nameTextBox.Text;
-                    item.reorder_level = Convert.ToInt32(reorderLevelTextBox.Text);
 
                     if (String.IsNullOrEmpty(nameTextBox.Text))
                     {
-                        errorLabel2.Text = "Name Field is Empty!";
+                        errorLabel.Text = "Name Field is Empty!";
                         return;
                     }
 
+                    errorLabel.Text = " ";
 
-                    errorLabel2.Text = " ";
-                    
-                    if(String.IsNullOrEmpty(reorderLevelTextBox.Text))
+                    if (_stockManager.IsExistItem(nameTextBox.Text))
                     {
-                        errorLabel3.Text = "Reorder Level Field is Empty!";
+                        MessageBox.Show("Item Already Exist!");
+                        nameTextBox.Clear();
+                        reorderLevelTextBox.Clear();
                         return;
                     }
-                    errorLabel3.Text=" ";
+
+
+                    if (String.IsNullOrEmpty(reorderLevelTextBox.Text))
+                    {
+                        reorderLabel.Text = "Reorder Level Field is Empty!";
+                        return;
+                    }
+                    reorderLabel.Text = " ";
+
+
+                    if (System.Text.RegularExpressions.Regex.IsMatch(reorderLevelTextBox.Text, "[^0-9]"))
+                    {
+                        reorderLabel.Text = "Enter Only Digits";
+                        return;
+                    }
+                    reorderLabel.Text = "";
+
+                    item.reorder_level = Convert.ToInt32(reorderLevelTextBox.Text);
 
                     int i;
                     i = displayItem.SelectedCells[0].RowIndex;
@@ -83,28 +99,17 @@ namespace StockManagementSystemAPP
                 else if (SaveButton.Text == "Save")
                 {
                     item.company_ID = Convert.ToInt32(companyComboBox.SelectedValue);
-
                     item.category_ID = Convert.ToInt32(categoryComboBox.SelectedValue);
+
                     item.Name = nameTextBox.Text;
 
                     if (String.IsNullOrEmpty(nameTextBox.Text))
                     {
-                        errorLabel2.Text = "Name Field is Empty!";
+                        errorLabel.Text = "Name Field is Empty!";
                         return;
                     }
-                    errorLabel2.Text = "";
 
-                    item.reorder_level = Convert.ToInt32(reorderLevelTextBox.Text);
-
-                  if (System.Text.RegularExpressions.Regex.IsMatch(reorderLevelTextBox.Text, "[^0-9]"))
-                    {
-                        errorLabel3.Text = "Enter Only Digits";
-                        return;
-                    }
-                    errorLabel3.Text = "";
-
-                    nameTextBox.Clear();
-                    reorderLevelTextBox.Clear();
+                    errorLabel.Text = " ";
 
                     if (_stockManager.IsExistItem(nameTextBox.Text))
                     {
@@ -114,10 +119,26 @@ namespace StockManagementSystemAPP
                         return;
                     }
 
-                  
+
+                    if (String.IsNullOrEmpty(reorderLevelTextBox.Text))
+                    {
+                        reorderLabel.Text = "Reorder Level Field is Empty!";
+                        return;
+                    }
+                    reorderLabel.Text = " ";
+
+
+                    if (System.Text.RegularExpressions.Regex.IsMatch(reorderLevelTextBox.Text, "[^0-9]"))
+                    {
+                        reorderLabel.Text = "Enter Only Digits";
+                        return;
+                    }
+                    reorderLabel.Text = "";
+
+                    item.reorder_level = Convert.ToInt32(reorderLevelTextBox.Text);
+
 
                     int isExecuted;
-
                     isExecuted = _stockManager.InsertItem(item);
 
                     if (isExecuted > 0)
@@ -131,14 +152,14 @@ namespace StockManagementSystemAPP
                 }
 
                 displayItem.DataSource = _stockManager.ShowItem();
-
             }
-            catch (Exception exception)
+
+            catch(Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
-           
-        }
+
+            }
 
 
         private void displayItem_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -168,21 +189,6 @@ namespace StockManagementSystemAPP
         private void displayItem_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             displayItem.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
-        }
-
-        private void itemBindingSource_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void reorderLevelTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char ch = e.KeyChar;
-
-            if (!Char.IsDigit(ch) && ch != 8)
-            {
-                e.Handled = true;
-            }
         }
     }
 }

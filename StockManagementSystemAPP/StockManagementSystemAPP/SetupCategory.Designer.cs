@@ -36,7 +36,7 @@
             this.SI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.errorLebel = new System.Windows.Forms.Label();
+            this.errorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.displayCategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -77,7 +77,7 @@
             this.displayCategory.DataSource = this.categoryBindingSource;
             this.displayCategory.Location = new System.Drawing.Point(189, 198);
             this.displayCategory.Name = "displayCategory";
-            this.displayCategory.Size = new System.Drawing.Size(240, 189);
+            this.displayCategory.Size = new System.Drawing.Size(251, 189);
             this.displayCategory.TabIndex = 3;
             this.displayCategory.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.displayCategory_RowPostPaint);
             this.displayCategory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.displayCategory_MouseDoubleClick);
@@ -97,21 +97,22 @@
             // 
             this.categoryBindingSource.DataSource = typeof(StockManagementSystemAPP.Models.Category);
             // 
-            // errorLebel
+            // errorLabel
             // 
-            this.errorLebel.AutoSize = true;
-            this.errorLebel.Location = new System.Drawing.Point(453, 86);
-            this.errorLebel.Name = "errorLebel";
-            this.errorLebel.Size = new System.Drawing.Size(0, 13);
-            this.errorLebel.TabIndex = 4;
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(460, 78);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(0, 16);
+            this.errorLabel.TabIndex = 4;
             // 
             // SetupCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.errorLebel);
+            this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.displayCategory);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.nameTextBox);
@@ -135,7 +136,7 @@
         private System.Windows.Forms.BindingSource categoryBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn SI;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Label errorLebel;
+        private System.Windows.Forms.Label errorLabel;
     }
 }
 

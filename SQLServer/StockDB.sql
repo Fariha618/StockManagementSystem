@@ -66,11 +66,12 @@ VALUES (1,120, CONVERT(VARCHAR(10), getdate(), 103))
 
 CREATE VIEW StockInView
 AS
-SELECT Name AS Item, Date, stockin_quantity, available_quantity  FROM StockIn  As s
+SELECT Name AS Item, Date, stockin_quantity FROM StockIn  As s
 LEFT JOIN Item AS i ON i.ID = s.item_ID 
 
 SELECT * FROM StockInView
 
+---DROP VIEW StockInView---
 
 
 -- Stock Out Table --
@@ -120,3 +121,9 @@ LEFT JOIN Category AS ca ON ca.ID = i.category_ID
 WHERE co.ID = 5 AND ca.ID = 2
 
 
+----View Between Two Dates Report -----
+
+SELECT i.Name AS Item, co.Name AS Company, stockout_quantity FROM StockOut AS s
+LEFT JOIN Item AS i ON i.ID = s.item_ID
+LEFT JOIN Company AS co ON co.ID = i.company_ID
+WHERE s.Date BETWEEN '05/07/2019' AND '06/07/2019' AND s.stockout_type = 0 ORDER BY s.Date DESC

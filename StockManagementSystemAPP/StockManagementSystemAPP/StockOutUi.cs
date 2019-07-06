@@ -35,6 +35,11 @@ namespace StockManagementSystemAPP
             dataTable.Columns.Add("Item");
             dataTable.Columns.Add("Company");
             dataTable.Columns.Add("Quantity");
+
+            
+            dataTable.Columns["SI"].AutoIncrement = true;          
+            dataTable.Columns["SI"].AutoIncrementSeed = 1;            
+            dataTable.Columns["SI"].AutoIncrementStep = 1;
         }
 
         private void StockOutUi_Load(object sender, EventArgs e)
@@ -58,7 +63,7 @@ namespace StockManagementSystemAPP
         {
             if (itemComboBox.SelectedIndex > -1)
             {
-                alertLebel.Text = "";
+                
                 stockIn.item_ID = Convert.ToInt32(itemComboBox.SelectedValue);
 
                 companyComboBox.Enabled = true;
@@ -84,18 +89,59 @@ namespace StockManagementSystemAPP
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            dataRow = dataTable.NewRow();
+            try
+            {
+                dataRow = dataTable.NewRow();
 
-            ID = Convert.ToInt32(itemComboBox.SelectedValue);
-            item_IDs.Add(ID);
-            dataRow["Item"] = itemComboBox.Text;
-            dataRow["Company"] = companyComboBox.Text;
-            dataRow["Quantity"] = stockOutQuantityTextBox.Text;
+                ID = Convert.ToInt32(itemComboBox.SelectedValue);
+                item_IDs.Add(ID);
+                dataRow["Item"] = itemComboBox.Text;
+                dataRow["Company"] = companyComboBox.Text;
+                dataRow["Quantity"] = stockOutQuantityTextBox.Text;
 
-            dataTable.Rows.Add(dataRow);            
 
-            displayStockOut.DataSource = dataTable;
-            stockOutQuantityTextBox.Clear();
+                if (String.IsNullOrEmpty(stockOutQuantityTextBox.Text))
+                {
+                    stockOutLabel.Text = "Stock Out Quantity Field Can Not Be Empty!";
+                    return;
+                }
+
+                stockOutLabel.Text = "";
+
+                if (System.Text.RegularExpressions.Regex.IsMatch(stockOutQuantityTextBox.Text, "[^0-9]"))
+                {
+                    stockOutLabel.Text = "Enter Only Digits";
+                    stockOutQuantityTextBox.Clear();
+                    return;
+                }                
+                
+                stockOutLabel.Text = "";
+
+                if(Convert.ToInt32(availableQuantityTextBox.Text) == 0)
+                {
+                    MessageBox.Show("There are no Items in inventory to stock out!");
+                    return;
+                }
+
+                dataTable.Rows.Add(dataRow);
+
+                displayStockOut.DataSource = dataTable;
+
+                stockOutQuantityTextBox.Clear();
+                reorderLevelTextBox.Text = "0";
+                reorderLevelTextBox.ReadOnly = true;
+
+                availableQuantityTextBox.Text = "0";
+                availableQuantityTextBox.ReadOnly = true;
+
+                companyComboBox.Enabled = false;
+                categoryComboBox.Enabled = false;
+            }
+            catch(Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+
         }
 
         private void SellButton_Click(object sender, EventArgs e)
@@ -105,9 +151,7 @@ namespace StockManagementSystemAPP
             for (int i = 0; i < displayStockOut.Rows.Count - 1; i++)
             {
                 stockOut.item_ID = item_IDs[i];
-                stockOut.stockout_quantity = Convert.ToInt32(displayStockOut.Rows[i].Cells[3].Value);
-
-               
+                stockOut.stockout_quantity = Convert.ToInt32(displayStockOut.Rows[i].Cells[3].Value);                
             }
 
 
@@ -122,8 +166,17 @@ namespace StockManagementSystemAPP
                 MessageBox.Show("Not Saved");
             }
 
-            displayStockOut.Columns.Clear();
-            
+            displayStockOut.Refresh();
+
+            reorderLevelTextBox.Text = "0";
+            reorderLevelTextBox.ReadOnly = true;
+
+            availableQuantityTextBox.Text = "0";
+            availableQuantityTextBox.ReadOnly = true;
+
+            companyComboBox.Enabled = false;
+            categoryComboBox.Enabled = false;
+
         }
 
         private void LostButton_Click(object sender, EventArgs e)
@@ -149,7 +202,16 @@ namespace StockManagementSystemAPP
                 MessageBox.Show("Not Saved");
             }
 
-            displayStockOut.Columns.Clear();
+            displayStockOut.Refresh();
+
+            reorderLevelTextBox.Text = "0";
+            reorderLevelTextBox.ReadOnly = true;
+
+            availableQuantityTextBox.Text = "0";
+            availableQuantityTextBox.ReadOnly = true;
+
+            companyComboBox.Enabled = false;
+            categoryComboBox.Enabled = false;
 
         }
 
@@ -160,9 +222,9 @@ namespace StockManagementSystemAPP
             for (int i = 0; i < displayStockOut.Rows.Count - 1; i++)
             {
                 stockOut.item_ID = item_IDs[i];
-                stockOut.stockout_quantity = Convert.ToInt32(displayStockOut.Rows[i].Cells[3].Value);
+                stockOut.stockout_quantity = Convert.ToInt32(displayStockOut.Rows[i].Cells[3].Value);             
 
-                
+
                 isExecuted = _stockManager.InsertDamage(stockOut);
                                 
             }
@@ -176,12 +238,16 @@ namespace StockManagementSystemAPP
                 MessageBox.Show("Not Saved");
             }
 
-            displayStockOut.Columns.Clear();
+            reorderLevelTextBox.Text = "0";
+            reorderLevelTextBox.ReadOnly = true;
+
+            availableQuantityTextBox.Text = "0";
+            availableQuantityTextBox.ReadOnly = true;
+
+            companyComboBox.Enabled = false;
+            categoryComboBox.Enabled = false;
+
         }
 
-        private void displayStockOut_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            displayStockOut.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
-        }
     }
 }

@@ -198,7 +198,7 @@
         private System.Windows.Forms.BindingSource categoryBindingSource;
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.DataGridView displayItemSummary;
-        private System.Windows.Forms.DataGridViewTextBoxColumn availableDataGridViewTextBoxColumn;
+        
         private System.Windows.Forms.BindingSource itemSummaryBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn SI;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemDataGridViewTextBoxColumn;

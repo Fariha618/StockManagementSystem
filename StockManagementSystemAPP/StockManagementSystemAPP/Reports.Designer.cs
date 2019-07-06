@@ -37,13 +37,13 @@
             this.fromDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.toDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.displayDataGridView = new System.Windows.Forms.DataGridView();
-            this.SI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SearcButton = new System.Windows.Forms.Button();
-            this.itemDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.companyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.reportLabel = new System.Windows.Forms.Label();
+            this.SI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.displayDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reportBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -123,20 +123,15 @@
             this.displayDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.displayDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SI,
-            this.itemDataGridViewTextBoxColumn,
-            this.companyDataGridViewTextBoxColumn,
-            this.quantityDataGridViewTextBoxColumn});
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3});
             this.displayDataGridView.DataSource = this.reportBindingSource;
-            this.displayDataGridView.Location = new System.Drawing.Point(129, 202);
+            this.displayDataGridView.Location = new System.Drawing.Point(139, 202);
             this.displayDataGridView.Name = "displayDataGridView";
-            this.displayDataGridView.Size = new System.Drawing.Size(470, 226);
+            this.displayDataGridView.Size = new System.Drawing.Size(443, 226);
             this.displayDataGridView.TabIndex = 3;
             this.displayDataGridView.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.displayDataGridView_RowPostPaint);
-            // 
-            // SI
-            // 
-            this.SI.HeaderText = "SI";
-            this.SI.Name = "SI";
             // 
             // SearcButton
             // 
@@ -148,28 +143,6 @@
             this.SearcButton.UseVisualStyleBackColor = true;
             this.SearcButton.Click += new System.EventHandler(this.SearcButton_Click);
             // 
-            // itemDataGridViewTextBoxColumn
-            // 
-            this.itemDataGridViewTextBoxColumn.DataPropertyName = "Item";
-            this.itemDataGridViewTextBoxColumn.HeaderText = "Item";
-            this.itemDataGridViewTextBoxColumn.Name = "itemDataGridViewTextBoxColumn";
-            // 
-            // companyDataGridViewTextBoxColumn
-            // 
-            this.companyDataGridViewTextBoxColumn.DataPropertyName = "Company";
-            this.companyDataGridViewTextBoxColumn.HeaderText = "Company";
-            this.companyDataGridViewTextBoxColumn.Name = "companyDataGridViewTextBoxColumn";
-            // 
-            // quantityDataGridViewTextBoxColumn
-            // 
-            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
-            this.quantityDataGridViewTextBoxColumn.HeaderText = "Quantity";
-            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
-            // 
-            // reportBindingSource
-            // 
-            this.reportBindingSource.DataSource = typeof(StockManagementSystemAPP.Models.Report);
-            // 
             // reportLabel
             // 
             this.reportLabel.AutoSize = true;
@@ -179,6 +152,33 @@
             this.reportLabel.Name = "reportLabel";
             this.reportLabel.Size = new System.Drawing.Size(0, 15);
             this.reportLabel.TabIndex = 5;
+            // 
+            // SI
+            // 
+            this.SI.HeaderText = "SI";
+            this.SI.Name = "SI";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Item";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Item";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Company";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Company";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Quantity";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Quantity";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // reportBindingSource
+            // 
+            this.reportBindingSource.DataSource = typeof(StockManagementSystemAPP.Models.Report);
             // 
             // Reports
             // 
@@ -215,11 +215,14 @@
         private System.Windows.Forms.DateTimePicker toDateTimePicker;
         private System.Windows.Forms.DataGridView displayDataGridView;
         private System.Windows.Forms.Button SearcButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SI;
-        private System.Windows.Forms.DataGridViewTextBoxColumn itemDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn companyDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource reportBindingSource;
+     
+       
+        
         private System.Windows.Forms.Label reportLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SI;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.BindingSource reportBindingSource;
     }
 }

@@ -50,6 +50,7 @@
             this.LostButton = new System.Windows.Forms.Button();
             this.DamageButton = new System.Windows.Forms.Button();
             this.alertLebel = new System.Windows.Forms.Label();
+            this.stockOutLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
@@ -184,7 +185,7 @@
             this.displayStockOut.Name = "displayStockOut";
             this.displayStockOut.Size = new System.Drawing.Size(455, 150);
             this.displayStockOut.TabIndex = 12;
-            this.displayStockOut.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.displayStockOut_RowPostPaint);
+           
             // 
             // AddButton
             // 
@@ -235,11 +236,22 @@
             this.alertLebel.Size = new System.Drawing.Size(0, 13);
             this.alertLebel.TabIndex = 17;
             // 
+            // stockOutLabel
+            // 
+            this.stockOutLabel.AutoSize = true;
+            this.stockOutLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stockOutLabel.ForeColor = System.Drawing.Color.Red;
+            this.stockOutLabel.Location = new System.Drawing.Point(535, 194);
+            this.stockOutLabel.Name = "stockOutLabel";
+            this.stockOutLabel.Size = new System.Drawing.Size(0, 15);
+            this.stockOutLabel.TabIndex = 18;
+            // 
             // StockOutUi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 534);
+            this.Controls.Add(this.stockOutLabel);
             this.Controls.Add(this.alertLebel);
             this.Controls.Add(this.DamageButton);
             this.Controls.Add(this.LostButton);
@@ -293,5 +305,6 @@
         private System.Windows.Forms.Button LostButton;
         private System.Windows.Forms.Button DamageButton;
         private System.Windows.Forms.Label alertLebel;
+        private System.Windows.Forms.Label stockOutLabel;
     }
 }
