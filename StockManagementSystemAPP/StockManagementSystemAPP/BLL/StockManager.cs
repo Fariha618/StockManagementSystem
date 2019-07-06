@@ -75,6 +75,12 @@ namespace StockManagementSystemAPP.BLL
             return _stockRepository.UpdateItem(item);
         }
 
+        public bool IsExistItem(string name)
+        {
+            bool isExist = _stockRepository.IsExistItem(name);
+            return isExist;
+        }
+
         public DataTable ShowItem()
         {
             return _stockRepository.ShowItem();

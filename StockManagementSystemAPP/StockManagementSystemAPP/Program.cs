@@ -17,11 +17,13 @@ namespace StockManagementSystemAPP
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new SetupCategory());
-            Application.Run(new SetupCompany());
-            //Application.Run(new SetupItem());
+            //Application.Run(new SetupCompany());
+            Application.Run(new SetupItem());
             //Application.Run(new StockInUi());
             //Application.Run(new StockOutUi());
             //Application.Run(new ItemSummaryUi());
+            
+            
         }
     }
 }

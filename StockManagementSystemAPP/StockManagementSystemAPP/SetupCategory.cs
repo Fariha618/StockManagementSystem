@@ -27,85 +27,94 @@ namespace StockManagementSystemAPP
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            if (SaveButton.Text == "Update")
+            try
             {
-                category.Name = nameTextBox.Text;
 
-                if (String.IsNullOrEmpty(nameTextBox.Text))
+                if (SaveButton.Text == "Update")
                 {
-                    errorLabel.Text = "Name Field Can Not Be Empty!";
-                    SaveButton.Text = "Save";
-                    return;
-                    
-                }
+                    category.Name = nameTextBox.Text;
 
-                errorLabel.Text = "";
+                    if (String.IsNullOrEmpty(nameTextBox.Text))
+                    {
+                        errorLabel.Text = "Name Field Can Not Be Empty!";
+                        SaveButton.Text = "Save";
+                        return;
 
-                if (_stockManager.IsExistCategory(nameTextBox.Text))
-                {
-                    errorLabel.Text = "Category Already Exist!";
+                    }
 
-                    nameTextBox.Focus();
+                    errorLabel.Text = "";
+
+                    if (_stockManager.IsExistCategory(nameTextBox.Text))
+                    {
+                        errorLabel.Text = "Category Already Exist!";
+
+                        nameTextBox.Focus();
+                        nameTextBox.Clear();
+                        SaveButton.Text = "Save";
+                        return;
+                    }
+
+                    int i;
+                    i = displayCategory.SelectedCells[0].RowIndex;
+                    category.oldName = displayCategory.Rows[i].Cells[1].Value.ToString();
+
+                    int isExecuted;
+                    isExecuted = _stockManager.UpdateCategory(category);
+
+                    if (isExecuted > 0)
+                    {
+                        MessageBox.Show("Updated");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not Updated");
+                    }
+
                     nameTextBox.Clear();
                     SaveButton.Text = "Save";
-                    return;
                 }
 
-                int i;
-                i = displayCategory.SelectedCells[0].RowIndex;
-                category.oldName = displayCategory.Rows[i].Cells[1].Value.ToString();
-
-                int isExecuted;
-                isExecuted = _stockManager.UpdateCategory(category);
-
-                if (isExecuted > 0)
+                else if (SaveButton.Text == "Save")
                 {
-                    MessageBox.Show("Updated");
-                }
-                else
-                {
-                    MessageBox.Show("Not Updated");
-                }
+                    category.Name = nameTextBox.Text;
 
-                nameTextBox.Clear();
-                SaveButton.Text = "Save";
-            }
+                    if (String.IsNullOrEmpty(nameTextBox.Text))
+                    {
+                        errorLabel.Text = "Name Field Can Not Be Empty!";
+                        return;
+                    }
 
-            else if (SaveButton.Text == "Save")
-            {
-                category.Name = nameTextBox.Text;
+                    errorLabel.Text = "";
 
-                if (String.IsNullOrEmpty(nameTextBox.Text))
-                {
-                    errorLabel.Text = "Name Field Can Not Be Empty!";
-                    return;
-                }
+                    if (_stockManager.IsExistCategory(nameTextBox.Text))
+                    {
+                        errorLabel.Text = "Category Already Exist!";
+                        nameTextBox.Clear();
+                        return;
+                    }
 
-                errorLabel.Text = "";
+                    int isExecuted;
+                    isExecuted = _stockManager.InsertCategory(category);
 
-                if (_stockManager.IsExistCategory(nameTextBox.Text))
-                {
-                    errorLabel.Text = "Category Already Exist!";                    
+                    if (isExecuted > 0)
+                    {
+                        MessageBox.Show("Saved");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not Saved");
+                    }
+
                     nameTextBox.Clear();
-                    return;
                 }
 
-                int isExecuted;
-                isExecuted = _stockManager.InsertCategory(category);
-
-                if (isExecuted > 0)
-                {
-                    MessageBox.Show("Saved");
-                }
-                else
-                {
-                    MessageBox.Show("Not Saved");
-                }
-
-                nameTextBox.Clear();
+                displayCategory.DataSource = _stockManager.ShowCategory();
             }
 
-            displayCategory.DataSource = _stockManager.ShowCategory();
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void SetupCategory_Load(object sender, EventArgs e)
