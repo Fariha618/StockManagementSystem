@@ -19,15 +19,10 @@ namespace StockManagementSystemAPP
             //Application.Run(new SetupCategory());
             Application.Run(new SetupCompany());
             //Application.Run(new SetupItem());
-<<<<<<< HEAD
             //Application.Run(new StockInUi());
             //Application.Run(new StockOutUi());
             //Application.Run(new ItemSummaryUi());
-=======
-            Application.Run(new StockInUi());
-            //Application.Run(new StockOutUi());
-            Application.Run(new ItemSummaryUi());
->>>>>>> f5abf30f030910cda321dcff1b04527791dfae0b
+
         }
     }
 }
