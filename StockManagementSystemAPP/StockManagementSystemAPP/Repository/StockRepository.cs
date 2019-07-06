@@ -19,6 +19,8 @@ namespace StockManagementSystemAPP.Repository
         private string commandString;
         private SqlCommand sqlCommand;
 
+        SqlDataReader reader;
+
         public int InsertCategory(Category category)
         {
 
@@ -75,6 +77,32 @@ namespace StockManagementSystemAPP.Repository
             return dataTable;
         }
 
+        public bool IsExistCategory(string name)
+        {
+            bool isExist = false;
+            sqlConnection = new SqlConnection(connectionString);
+            string query = "Select * From Category Where Name='" + name + "'";
+            try
+            {
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+                reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    isExist = true;
+                }
+            }
+            catch (Exception)
+            {
+                isExist = false;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+            return isExist;
+        }
+
         public int InsertCompany(Company company)
         {
 
@@ -129,6 +157,32 @@ namespace StockManagementSystemAPP.Repository
             sqlConnection.Close();
 
             return dataTable;
+        }
+
+        public bool IsExistCompany(string name)
+        {
+            bool isExist = false;
+            sqlConnection = new SqlConnection(connectionString);
+            string query = "Select * From Company Where Name='" + name + "'";
+            try
+            {
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+                reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    isExist = true;
+                }
+            }
+            catch (Exception)
+            {
+                isExist = false;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+            return isExist;
         }
 
         public DataTable LoadCompany()

@@ -28,6 +28,12 @@ namespace StockManagementSystemAPP.BLL
             return _stockRepository.ShowCategory();
         }
 
+        public bool IsExistCategory(string name)
+        {
+            bool isExist = _stockRepository.IsExistCategory(name);
+            return isExist;
+        }
+
         public int InsertCompany(Company company)
         {
             return _stockRepository.InsertCompany(company);
@@ -41,6 +47,12 @@ namespace StockManagementSystemAPP.BLL
         public DataTable ShowCompany()
         {
             return _stockRepository.ShowCompany();
+        }
+
+        public bool IsExistCompany(string name)
+        {
+            bool isExist = _stockRepository.IsExistCompany(name);
+            return isExist;
         }
 
         public DataTable LoadCompany()

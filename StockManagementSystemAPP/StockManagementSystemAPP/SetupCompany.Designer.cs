@@ -31,11 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.SaveButton = new System.Windows.Forms.Button();
             this.displayCompany = new System.Windows.Forms.DataGridView();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.companyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.SI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.companyBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.errorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.displayCompany)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -65,6 +66,21 @@
             this.displayCompany.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.displayCompany_RowPostPaint);
             this.displayCompany.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.displayCompany_MouseDoubleClick);
             // 
+            // SI
+            // 
+            this.SI.HeaderText = "SI";
+            this.SI.Name = "SI";
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // companyBindingSource
+            // 
+            this.companyBindingSource.DataSource = typeof(StockManagementSystemAPP.Models.Company);
+            // 
             // nameTextBox
             // 
             this.nameTextBox.Location = new System.Drawing.Point(275, 58);
@@ -81,26 +97,22 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Name";
             // 
-            // companyBindingSource
+            // errorLabel
             // 
-            this.companyBindingSource.DataSource = typeof(StockManagementSystemAPP.Models.Company);
-            // 
-            // SI
-            // 
-            this.SI.HeaderText = "SI";
-            this.SI.Name = "SI";
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(456, 61);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(0, 15);
+            this.errorLabel.TabIndex = 4;
             // 
             // SetupCompany
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.displayCompany);
@@ -124,5 +136,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SI;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource companyBindingSource;
+        private System.Windows.Forms.Label errorLabel;
     }
 }
