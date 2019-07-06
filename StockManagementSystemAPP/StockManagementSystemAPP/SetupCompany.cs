@@ -29,6 +29,26 @@ namespace StockManagementSystemAPP
             {
                 company.Name = nameTextBox.Text;
 
+                if (String.IsNullOrEmpty(nameTextBox.Text))
+                {
+                    errorLabel.Text = "Name Field Can Not Be Empty!";
+
+                    nameTextBox.Clear();
+                    SaveButton.Text = "Save";
+
+                    return;
+                }
+                errorLabel.Text = "";
+
+                if (_stockManager.IsExistCompany(nameTextBox.Text))
+                {
+                    errorLabel.Text = "Company Already Exist!";
+
+                    nameTextBox.Clear();
+                    SaveButton.Text = "Save";
+                    return;
+                }
+
                 int i;
                 i = displayCompany.SelectedCells[0].RowIndex;
                 company.oldName = displayCompany.Rows[i].Cells[1].Value.ToString();
@@ -52,6 +72,24 @@ namespace StockManagementSystemAPP
             else if (SaveButton.Text == "Save")
             {
                 company.Name = nameTextBox.Text;
+
+                if (String.IsNullOrEmpty(nameTextBox.Text))
+                {
+                    errorLabel.Text = "Name Field Can Not Be Empty!";
+
+                    nameTextBox.Clear();
+                    return;
+                }
+
+                errorLabel.Text = "";
+
+                if (_stockManager.IsExistCompany(nameTextBox.Text))
+                {
+                    errorLabel.Text = "Company Already Exist!";
+
+                    nameTextBox.Clear();                    
+                    return;
+                }
 
                 int isExecuted;
                 isExecuted = _stockManager.InsertCompany(company);

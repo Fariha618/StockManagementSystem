@@ -81,11 +81,7 @@ namespace StockManagementSystemAPP
 
             if (SaveButton.Text == "Save")
             {
-                stockIn.item_ID = Convert.ToInt32(itemComboBox.SelectedValue);
-
-                int availableQuantity;
-                availableQuantity = _stockManager.GetAvailableQuantity(stockIn, stockOut);
-                stockIn.available_quantity = availableQuantity;
+                stockIn.item_ID = Convert.ToInt32(itemComboBox.SelectedValue);                
 
                 stockIn.stockin_quantity = Convert.ToInt32(stockInQuantityTextBox.Text);
 
@@ -104,11 +100,8 @@ namespace StockManagementSystemAPP
 
             else if (SaveButton.Text == "Update")
             {
-                stockIn.item_ID = Convert.ToInt32(itemComboBox.SelectedValue);               
-                
-                int availableQuantity;
-                availableQuantity = _stockManager.GetAvailableQuantity(stockIn, stockOut);
-                stockIn.available_quantity = availableQuantity;
+                stockIn.item_ID = Convert.ToInt32(itemComboBox.SelectedValue);           
+                                
 
                 stockIn.stockin_quantity = Convert.ToInt32(stockInQuantityTextBox.Text);
 
@@ -143,7 +136,13 @@ namespace StockManagementSystemAPP
                 SaveButton.Text = "Save";
             }
 
-                displayStockIn.DataSource = _stockManager.ShowStockIn();
+            int availableQuantity;
+            availableQuantity = _stockManager.GetAvailableQuantity(stockIn, stockOut);
+            stockIn.available_quantity = availableQuantity;
+
+            _stockManager.InsertAvailableQuantity(stockIn);
+
+            displayStockIn.DataSource = _stockManager.ShowStockIn();
         }
 
         private void displayStockIn_CellContentClick(object sender, DataGridViewCellEventArgs e)

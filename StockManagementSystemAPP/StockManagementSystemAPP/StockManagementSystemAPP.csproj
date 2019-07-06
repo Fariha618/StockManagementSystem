@@ -47,9 +47,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\StockManager.cs" />
+    <Compile Include="ItemSummaryUi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemSummaryUi.Designer.cs">
+      <DependentUpon>ItemSummaryUi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\ItemSummary.cs" />
     <Compile Include="Models\StockIn.cs" />
     <Compile Include="Models\StockOut.cs" />
     <Compile Include="Repository\StockRepository.cs" />
@@ -85,6 +92,9 @@
     <Compile Include="StockOutUi.Designer.cs">
       <DependentUpon>StockOutUi.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ItemSummaryUi.resx">
+      <DependentUpon>ItemSummaryUi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -112,6 +122,7 @@
     <None Include="Properties\DataSources\StockManagementSystemAPP.Models.Category.datasource" />
     <None Include="Properties\DataSources\StockManagementSystemAPP.Models.Company.datasource" />
     <None Include="Properties\DataSources\StockManagementSystemAPP.Models.Item.datasource" />
+    <None Include="Properties\DataSources\StockManagementSystemAPP.Models.ItemSummary.datasource" />
     <None Include="Properties\DataSources\StockManagementSystemAPP.Models.StockIn.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

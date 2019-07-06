@@ -31,6 +31,26 @@ namespace StockManagementSystemAPP
             {
                 category.Name = nameTextBox.Text;
 
+                if (String.IsNullOrEmpty(nameTextBox.Text))
+                {
+                    errorLabel.Text = "Name Field Can Not Be Empty!";
+                    SaveButton.Text = "Save";
+                    return;
+                    
+                }
+
+                errorLabel.Text = "";
+
+                if (_stockManager.IsExistCategory(nameTextBox.Text))
+                {
+                    errorLabel.Text = "Category Already Exist!";
+
+                    nameTextBox.Focus();
+                    nameTextBox.Clear();
+                    SaveButton.Text = "Save";
+                    return;
+                }
+
                 int i;
                 i = displayCategory.SelectedCells[0].RowIndex;
                 category.oldName = displayCategory.Rows[i].Cells[1].Value.ToString();
@@ -54,6 +74,21 @@ namespace StockManagementSystemAPP
             else if (SaveButton.Text == "Save")
             {
                 category.Name = nameTextBox.Text;
+
+                if (String.IsNullOrEmpty(nameTextBox.Text))
+                {
+                    errorLabel.Text = "Name Field Can Not Be Empty!";
+                    return;
+                }
+
+                errorLabel.Text = "";
+
+                if (_stockManager.IsExistCategory(nameTextBox.Text))
+                {
+                    errorLabel.Text = "Category Already Exist!";                    
+                    nameTextBox.Clear();
+                    return;
+                }
 
                 int isExecuted;
                 isExecuted = _stockManager.InsertCategory(category);
