@@ -98,4 +98,25 @@ VALUES (1, 60, 0)
 SELECT ISNULL((SELECT SUM(stockin_quantity) FROM StockIn WHERE item_ID = 2),0) - ISNULL((SELECT stockout_quantity FROM StockOut WHERE item_ID = 2),0) 
 
 
+----Item Summary Table -----
+
+SELECT * FROM Item
+SELECT * FROM Company
+SELECT * FROM Category
+
+SELECT c.Name FROM Item AS i LEFT JOIN Company AS c ON c.ID = i.company_ID WHERE i.category_ID = 2 
+
+SELECT c.Name FROM Item AS i LEFT JOIN Category AS c ON c.ID = i.category_ID WHERE i.company_ID = 2
+
+DROP VIEW ItemSearch
+SELECT * FROM Item
+SELECT * FROM Company
+SELECT * FROM Category
+SELECT * FROM StockIn
+
+SELECT DISTINCT i.Name AS Item, co.Name AS Company, ca.Name AS Category, reorder_level FROM Item AS i
+LEFT JOIN Company AS co ON co.ID = i.company_ID 
+LEFT JOIN Category AS ca ON ca.ID = i.category_ID
+WHERE co.ID = 5 AND ca.ID = 2
+
 

@@ -98,6 +98,11 @@ namespace StockManagementSystemAPP.BLL
             return _stockRepository.InsertStockIn(stockIn);
         }
 
+        public int InsertAvailableQuantity(StockIn stockIn)
+        {
+            return _stockRepository.InsertAvailableQuantity(stockIn);
+        }
+
         public DataTable ShowStockIn()
         {
             return _stockRepository.ShowStockIn();
@@ -122,5 +127,22 @@ namespace StockManagementSystemAPP.BLL
         {
             return _stockRepository.InsertDamage(stockOut);
         }
+
+        public DataTable GetCategoryforSearch(ItemSummary itemSummary)
+        {
+            return _stockRepository.GetCategoryforSearch(itemSummary);
+        }
+
+        public DataTable GetCompanyforSearch(ItemSummary itemSummary)
+        {
+            return _stockRepository.GetCompanyforSearch(itemSummary);
+        }
+
+        public DataTable SearchItem(ItemSummary itemSummary)
+        {
+            return _stockRepository.SearchItem(itemSummary);
+        }
+
+        
     }
 }
