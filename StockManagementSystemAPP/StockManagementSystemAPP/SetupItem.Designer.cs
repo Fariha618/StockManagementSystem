@@ -34,22 +34,24 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.categoryComboBox = new System.Windows.Forms.ComboBox();
+            this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.companyComboBox = new System.Windows.Forms.ComboBox();
+            this.companyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.SaveButton = new System.Windows.Forms.Button();
             this.displayItem = new System.Windows.Forms.DataGridView();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.reorderLevelTextBox = new System.Windows.Forms.TextBox();
-            this.companyBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.SI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.companyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reorder_level = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.displayItem)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).BeginInit();
+            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.reorderLevelTextBox = new System.Windows.Forms.TextBox();
+            this.errorLabel2 = new System.Windows.Forms.Label();
+            this.errorLabel3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.displayItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,6 +102,10 @@
             this.categoryComboBox.TabIndex = 4;
             this.categoryComboBox.ValueMember = "ID";
             // 
+            // categoryBindingSource
+            // 
+            this.categoryBindingSource.DataSource = typeof(StockManagementSystemAPP.Models.Category);
+            // 
             // companyComboBox
             // 
             this.companyComboBox.DataSource = this.companyBindingSource;
@@ -110,6 +116,10 @@
             this.companyComboBox.Size = new System.Drawing.Size(203, 21);
             this.companyComboBox.TabIndex = 5;
             this.companyComboBox.ValueMember = "ID";
+            // 
+            // companyBindingSource
+            // 
+            this.companyBindingSource.DataSource = typeof(StockManagementSystemAPP.Models.Company);
             // 
             // SaveButton
             // 
@@ -138,32 +148,6 @@
             this.displayItem.TabIndex = 7;
             this.displayItem.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.displayItem_RowPostPaint);
             this.displayItem.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.displayItem_MouseDoubleClick);
-            // 
-            // nameTextBox
-            // 
-            this.nameTextBox.Location = new System.Drawing.Point(311, 108);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(203, 20);
-            this.nameTextBox.TabIndex = 8;
-            // 
-            // reorderLevelTextBox
-            // 
-            this.reorderLevelTextBox.Location = new System.Drawing.Point(311, 144);
-            this.reorderLevelTextBox.Name = "reorderLevelTextBox";
-            this.reorderLevelTextBox.Size = new System.Drawing.Size(203, 20);
-            this.reorderLevelTextBox.TabIndex = 9;
-            // 
-            // companyBindingSource
-            // 
-            this.companyBindingSource.DataSource = typeof(StockManagementSystemAPP.Models.Company);
-            // 
-            // categoryBindingSource
-            // 
-            this.categoryBindingSource.DataSource = typeof(StockManagementSystemAPP.Models.Category);
-            // 
-            // itemBindingSource
-            // 
-            this.itemBindingSource.DataSource = typeof(StockManagementSystemAPP.Models.Item);
             // 
             // SI
             // 
@@ -194,11 +178,49 @@
             this.reorder_level.HeaderText = "Reorder Level";
             this.reorder_level.Name = "reorder_level";
             // 
+            // itemBindingSource
+            // 
+            this.itemBindingSource.DataSource = typeof(StockManagementSystemAPP.Models.Item);
+            this.itemBindingSource.CurrentChanged += new System.EventHandler(this.itemBindingSource_CurrentChanged);
+            // 
+            // nameTextBox
+            // 
+            this.nameTextBox.Location = new System.Drawing.Point(311, 108);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(203, 20);
+            this.nameTextBox.TabIndex = 8;
+            // 
+            // reorderLevelTextBox
+            // 
+            this.reorderLevelTextBox.Location = new System.Drawing.Point(311, 144);
+            this.reorderLevelTextBox.Name = "reorderLevelTextBox";
+            this.reorderLevelTextBox.Size = new System.Drawing.Size(203, 20);
+            this.reorderLevelTextBox.TabIndex = 9;
+            this.reorderLevelTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.reorderLevelTextBox_KeyPress);
+            // 
+            // errorLabel2
+            // 
+            this.errorLabel2.AutoSize = true;
+            this.errorLabel2.Location = new System.Drawing.Point(533, 111);
+            this.errorLabel2.Name = "errorLabel2";
+            this.errorLabel2.Size = new System.Drawing.Size(0, 13);
+            this.errorLabel2.TabIndex = 10;
+            // 
+            // errorLabel3
+            // 
+            this.errorLabel3.AutoSize = true;
+            this.errorLabel3.Location = new System.Drawing.Point(533, 147);
+            this.errorLabel3.Name = "errorLabel3";
+            this.errorLabel3.Size = new System.Drawing.Size(0, 13);
+            this.errorLabel3.TabIndex = 10;
+            // 
             // SetupItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.errorLabel3);
+            this.Controls.Add(this.errorLabel2);
             this.Controls.Add(this.reorderLevelTextBox);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.displayItem);
@@ -212,9 +234,9 @@
             this.Name = "SetupItem";
             this.Text = "SetupItem";
             this.Load += new System.EventHandler(this.SetupItem_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.displayItem)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.displayItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -241,5 +263,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn reorder_level;
         private System.Windows.Forms.BindingSource itemBindingSource;
+        private System.Windows.Forms.Label errorLabel2;
+        private System.Windows.Forms.Label errorLabel3;
     }
 }

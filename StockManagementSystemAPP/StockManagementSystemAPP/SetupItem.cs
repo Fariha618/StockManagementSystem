@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using StockManagementSystemAPP.Models;
 using StockManagementSystemAPP.BLL;
+using System.Text.RegularExpressions;
 
 namespace StockManagementSystemAPP
 {
@@ -32,57 +33,113 @@ namespace StockManagementSystemAPP
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            if (SaveButton.Text == "Update")
+            try
             {
-                item.company_ID = Convert.ToInt32(companyComboBox.SelectedValue);
-                item.category_ID = Convert.ToInt32(categoryComboBox.SelectedValue);
-                item.Name = nameTextBox.Text;
-                item.reorder_level = Convert.ToInt32(reorderLevelTextBox.Text);
-
-                int i;
-                i = displayItem.SelectedCells[0].RowIndex;
-                item.oldName = displayItem.Rows[i].Cells[1].Value.ToString();
-
-
-                int isExecuted;
-                isExecuted = _stockManager.UpdateItem(item);
-
-                if (isExecuted > 0)
+                if (SaveButton.Text == "Update")
                 {
-                    MessageBox.Show("Updated");
-                }
-                else
-                {
-                    MessageBox.Show("Not Updated");
+                    item.company_ID = Convert.ToInt32(companyComboBox.SelectedValue);
+                    item.category_ID = Convert.ToInt32(categoryComboBox.SelectedValue);
+                    item.Name = nameTextBox.Text;
+                    item.reorder_level = Convert.ToInt32(reorderLevelTextBox.Text);
+
+                    if (String.IsNullOrEmpty(nameTextBox.Text))
+                    {
+                        errorLabel2.Text = "Name Field is Empty!";
+                        return;
+                    }
+
+
+                    errorLabel2.Text = " ";
+                    
+                    if(String.IsNullOrEmpty(reorderLevelTextBox.Text))
+                    {
+                        errorLabel3.Text = "Reorder Level Field is Empty!";
+                        return;
+                    }
+                    errorLabel3.Text=" ";
+
+                    int i;
+                    i = displayItem.SelectedCells[0].RowIndex;
+                    item.oldName = displayItem.Rows[i].Cells[1].Value.ToString();
+
+
+                    int isExecuted;
+                    isExecuted = _stockManager.UpdateItem(item);
+
+                    if (isExecuted > 0)
+                    {
+                        MessageBox.Show("Updated");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not Updated");
+                    }
+
+                    nameTextBox.Clear();
+                    reorderLevelTextBox.Clear();
+                    SaveButton.Text = "Save";
                 }
 
-                nameTextBox.Clear();
-                reorderLevelTextBox.Clear();
-                SaveButton.Text = "Save";
+                else if (SaveButton.Text == "Save")
+                {
+                    item.company_ID = Convert.ToInt32(companyComboBox.SelectedValue);
+
+                    item.category_ID = Convert.ToInt32(categoryComboBox.SelectedValue);
+                    item.Name = nameTextBox.Text;
+
+                    if (String.IsNullOrEmpty(nameTextBox.Text))
+                    {
+                        errorLabel2.Text = "Name Field is Empty!";
+                        return;
+                    }
+                    errorLabel2.Text = "";
+
+                    item.reorder_level = Convert.ToInt32(reorderLevelTextBox.Text);
+
+                  if (System.Text.RegularExpressions.Regex.IsMatch(reorderLevelTextBox.Text, "[^0-9]"))
+                    {
+                        errorLabel3.Text = "Enter Only Digits";
+                        return;
+                    }
+                    errorLabel3.Text = "";
+
+                    nameTextBox.Clear();
+                    reorderLevelTextBox.Clear();
+
+                    if (_stockManager.IsExistItem(nameTextBox.Text))
+                    {
+                        MessageBox.Show("Item Already Exist!");
+                        nameTextBox.Clear();
+                        reorderLevelTextBox.Clear();
+                        return;
+                    }
+
+                  
+
+                    int isExecuted;
+
+                    isExecuted = _stockManager.InsertItem(item);
+
+                    if (isExecuted > 0)
+                    {
+                        MessageBox.Show("Saved");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not Saved");
+                    }
+                }
+
+                displayItem.DataSource = _stockManager.ShowItem();
+
             }
-
-            else if (SaveButton.Text == "Save")
+            catch (Exception exception)
             {
-                item.company_ID = Convert.ToInt32(companyComboBox.SelectedValue);
-                item.category_ID = Convert.ToInt32(categoryComboBox.SelectedValue);
-                item.Name = nameTextBox.Text;
-                item.reorder_level = Convert.ToInt32(reorderLevelTextBox.Text);
-
-                int isExecuted;
-                isExecuted = _stockManager.InsertItem(item);
-
-                if (isExecuted > 0)
-                {
-                    MessageBox.Show("Saved");
-                }
-                else
-                {
-                    MessageBox.Show("Not Saved");
-                }
+                MessageBox.Show(exception.Message);
             }
-
-            displayItem.DataSource = _stockManager.ShowItem();
+           
         }
+
 
         private void displayItem_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -111,6 +168,21 @@ namespace StockManagementSystemAPP
         private void displayItem_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             displayItem.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
+        }
+
+        private void itemBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void reorderLevelTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+
+            if (!Char.IsDigit(ch) && ch != 8)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

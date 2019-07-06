@@ -23,15 +23,15 @@ namespace StockManagementSystemAPP.BLL
             return _stockRepository.UpdateCategory(category);
         }
 
-        public DataTable ShowCategory()
-        {
-            return _stockRepository.ShowCategory();
-        }
-
         public bool IsExistCategory(string name)
         {
             bool isExist = _stockRepository.IsExistCategory(name);
             return isExist;
+        }
+
+        public DataTable ShowCategory()
+        {
+            return _stockRepository.ShowCategory();
         }
 
         public int InsertCompany(Company company)
@@ -43,16 +43,15 @@ namespace StockManagementSystemAPP.BLL
         {
             return _stockRepository.UpdateCompany(company);
         }
-
-        public DataTable ShowCompany()
-        {
-            return _stockRepository.ShowCompany();
-        }
-
         public bool IsExistCompany(string name)
         {
             bool isExist = _stockRepository.IsExistCompany(name);
             return isExist;
+        }
+
+        public DataTable ShowCompany()
+        {
+            return _stockRepository.ShowCompany();
         }
 
         public DataTable LoadCompany()
@@ -68,6 +67,11 @@ namespace StockManagementSystemAPP.BLL
         public int InsertItem(Item item)
         {
             return _stockRepository.InsertItem(item);
+        }
+        public bool IsExistItem(string name)
+        {
+            bool isExist = _stockRepository.IsExistItem(name);
+            return isExist;
         }
 
         public int UpdateItem(Item item)
@@ -95,7 +99,7 @@ namespace StockManagementSystemAPP.BLL
             return _stockRepository.GetCategory(stockIn);
         }
 
-        public int GetReorderLevel(StockIn stockIn)
+        public string GetReorderLevel(StockIn stockIn)
         {
             return _stockRepository.GetReorderLevel(stockIn);
         }
@@ -110,51 +114,14 @@ namespace StockManagementSystemAPP.BLL
             return _stockRepository.InsertStockIn(stockIn);
         }
 
-        public int InsertAvailableQuantity(StockIn stockIn)
-        {
-            return _stockRepository.InsertAvailableQuantity(stockIn);
-        }
-
         public DataTable ShowStockIn()
         {
             return _stockRepository.ShowStockIn();
         }
-
-        public int UpdateStockIn(StockIn stockIn)
+        public DataTable LoadStockOutToDataGridView(Report report)
         {
-            return _stockRepository.UpdateStockIn(stockIn);
+            return _stockRepository.LoadStockOutToDataGridView(report);
         }
 
-        public int InsertSell(StockOut stockOut)
-        {
-            return _stockRepository.InsertSell(stockOut);
-        }
-
-        public int InsertLost(StockOut stockOut)
-        {
-            return _stockRepository.InsertLost(stockOut);
-        }
-
-        public int InsertDamage(StockOut stockOut)
-        {
-            return _stockRepository.InsertDamage(stockOut);
-        }
-
-        public DataTable GetCategoryforSearch(ItemSummary itemSummary)
-        {
-            return _stockRepository.GetCategoryforSearch(itemSummary);
-        }
-
-        public DataTable GetCompanyforSearch(ItemSummary itemSummary)
-        {
-            return _stockRepository.GetCompanyforSearch(itemSummary);
-        }
-
-        public DataTable SearchItem(ItemSummary itemSummary)
-        {
-            return _stockRepository.SearchItem(itemSummary);
-        }
-
-        
     }
 }

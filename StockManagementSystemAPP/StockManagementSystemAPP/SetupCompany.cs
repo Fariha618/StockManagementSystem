@@ -25,88 +25,86 @@ namespace StockManagementSystemAPP
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            if (SaveButton.Text == "Update")
+            try
             {
-                company.Name = nameTextBox.Text;
-
-                if (String.IsNullOrEmpty(nameTextBox.Text))
+                if (SaveButton.Text == "Update")
                 {
-                    errorLabel.Text = "Name Field Can Not Be Empty!";
+                    company.Name = nameTextBox.Text;
+                    if (String.IsNullOrEmpty(nameTextBox.Text))
+                    {
+                        errorLabel1.Text = "Name Field is Empty!";
+                        nameTextBox.Focus();
+                        
+                        return;
+                    }
+
+                    errorLabel1.Text = "";
+
+                    int i;
+                    i = displayCompany.SelectedCells[0].RowIndex;
+                    company.oldName = displayCompany.Rows[i].Cells[1].Value.ToString();
+
+                    int isExecuted;
+                    isExecuted = _stockManager.UpdateCompany(company);
+
+                    if (isExecuted > 0)
+                    {
+                        MessageBox.Show("Updated");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not Updated");
+                    }
 
                     nameTextBox.Clear();
                     SaveButton.Text = "Save";
-
-                    return;
                 }
-                errorLabel.Text = "";
 
-                if (_stockManager.IsExistCompany(nameTextBox.Text))
+                else if (SaveButton.Text == "Save")
                 {
-                    errorLabel.Text = "Company Already Exist!";
+                    company.Name = nameTextBox.Text;
+
+                    if (String.IsNullOrEmpty(nameTextBox.Text))
+                    {
+                        errorLabel1.Text = "Name Field is Empty!";
+                       
+                        nameTextBox.Clear();
+                        
+                        return;
+                    }
+                    errorLabel1.Text = "";
+
+                    if (_stockManager.IsExistCompany(nameTextBox.Text))
+                    {
+                        MessageBox.Show("Company Already Exist!");
+
+                        nameTextBox.Clear();
+                        nameTextBox.Focus();
+                        return;
+                    }
+
+                    int isExecuted;
+                    isExecuted = _stockManager.InsertCompany(company);
+
+                    if (isExecuted > 0)
+                    {
+                        MessageBox.Show("Saved");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not Saved");
+                    }
 
                     nameTextBox.Clear();
-                    SaveButton.Text = "Save";
-                    return;
                 }
 
-                int i;
-                i = displayCompany.SelectedCells[0].RowIndex;
-                company.oldName = displayCompany.Rows[i].Cells[1].Value.ToString();
-
-                int isExecuted;
-                isExecuted = _stockManager.UpdateCompany(company);
-
-                if (isExecuted > 0)
-                {
-                    MessageBox.Show("Updated");
-                }
-                else
-                {
-                    MessageBox.Show("Not Updated");
-                }
-
-                nameTextBox.Clear();
-                SaveButton.Text = "Save";
+                displayCompany.DataSource = _stockManager.ShowCompany();
             }
-
-            else if (SaveButton.Text == "Save")
+            catch (Exception exception)
             {
-                company.Name = nameTextBox.Text;
-
-                if (String.IsNullOrEmpty(nameTextBox.Text))
-                {
-                    errorLabel.Text = "Name Field Can Not Be Empty!";
-
-                    nameTextBox.Clear();
-                    return;
-                }
-
-                errorLabel.Text = "";
-
-                if (_stockManager.IsExistCompany(nameTextBox.Text))
-                {
-                    errorLabel.Text = "Company Already Exist!";
-
-                    nameTextBox.Clear();                    
-                    return;
-                }
-
-                int isExecuted;
-                isExecuted = _stockManager.InsertCompany(company);
-
-                if (isExecuted > 0)
-                {
-                    MessageBox.Show("Saved");
-                }
-                else
-                {
-                    MessageBox.Show("Not Saved");
-                }
-
-                nameTextBox.Clear();
+                MessageBox.Show(exception.Message);
             }
-
-            displayCompany.DataSource = _stockManager.ShowCompany();
+           
         }
 
         private void SetupCompany_Load(object sender, EventArgs e)

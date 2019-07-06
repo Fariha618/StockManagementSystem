@@ -15,7 +15,7 @@ namespace StockManagementSystemAPP.Models
         public int reorder_level { get; set; }
 
         public string Company { get; set; }
-        public string Category { get; set; }
+        public int stockout_type { get; set; }
 
         public string oldName;
     }
