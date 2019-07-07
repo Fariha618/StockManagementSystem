@@ -438,7 +438,7 @@ namespace StockManagementSystemAPP.Repository
         {
 
             sqlConnection = new SqlConnection(connectionString);
-            commandString = @"SELECT * FROM StockInView";
+            commandString = @"SELECT Name AS Item, Date, stockin_quantity FROM StockIn  As s LEFT JOIN Item AS i ON i.ID = s.item_ID ORDER BY s.ID DESC";
             sqlCommand = new SqlCommand(commandString, sqlConnection);
 
             sqlConnection.Open();

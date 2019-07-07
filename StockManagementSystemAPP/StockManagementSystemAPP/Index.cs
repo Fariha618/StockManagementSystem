@@ -44,6 +44,12 @@ namespace StockManagementSystemAPP
             stockInUi.Show();
         }
 
+        private void stockOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StockOutUi stockOutUi = new StockOutUi();
+            stockOutUi.Show();
+        }
+
         private void seachAndViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ItemSummaryUi itemSummaryUi=new ItemSummaryUi();
@@ -55,5 +61,7 @@ namespace StockManagementSystemAPP
             Reports reports=new Reports();
             reports.Show();
         }
+
+        
     }
 }

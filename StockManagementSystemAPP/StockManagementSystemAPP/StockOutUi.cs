@@ -44,6 +44,7 @@ namespace StockManagementSystemAPP
 
         private void StockOutUi_Load(object sender, EventArgs e)
         {
+            
             companyComboBox.DataSource = _stockManager.LoadCompany();
             categoryComboBox.DataSource = _stockManager.LoadCategory();
 
@@ -123,7 +124,7 @@ namespace StockManagementSystemAPP
                     return;
                 }
 
-                dataTable.Rows.Add(dataRow);
+                dataTable.Rows.Add(dataRow);                
 
                 displayStockOut.DataSource = dataTable;
 
@@ -137,115 +138,168 @@ namespace StockManagementSystemAPP
                 companyComboBox.Enabled = false;
                 categoryComboBox.Enabled = false;
             }
+            
+            
+            catch(Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            
+        }
+
+        private void SellButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (this.displayStockOut.DataSource == null)
+                {
+                    MessageBox.Show("Add Stock Out Items First!");
+                    return;
+                }
+
+                int isExecuted = 0;
+
+                for (int i = 0; i < displayStockOut.Rows.Count - 1; i++)
+                {
+                    stockOut.item_ID = item_IDs[i];
+                    stockOut.stockout_quantity = Convert.ToInt32(displayStockOut.Rows[i].Cells[3].Value);
+                }
+
+
+                isExecuted = _stockManager.InsertSell(stockOut);
+
+                if (isExecuted > 0)
+                {
+                    MessageBox.Show("Saved As Sold Items");
+                }
+                else
+                {
+                    MessageBox.Show("Not Saved");
+                }
+
+
+                reorderLevelTextBox.Text = "0";
+                reorderLevelTextBox.ReadOnly = true;
+
+                availableQuantityTextBox.Text = "0";
+                availableQuantityTextBox.ReadOnly = true;
+
+                stockOutQuantityTextBox.Clear();
+
+                companyComboBox.Enabled = false;
+                categoryComboBox.Enabled = false;
+
+                
+            }
+
             catch(Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
 
         }
-
-        private void SellButton_Click(object sender, EventArgs e)
-        {
-            int isExecuted = 0;
-
-            for (int i = 0; i < displayStockOut.Rows.Count - 1; i++)
-            {
-                stockOut.item_ID = item_IDs[i];
-                stockOut.stockout_quantity = Convert.ToInt32(displayStockOut.Rows[i].Cells[3].Value);                
-            }
-
-
-            isExecuted = _stockManager.InsertSell(stockOut);
-
-            if (isExecuted > 0)
-            {
-                MessageBox.Show("Saved As Sold Items");
-            }
-            else
-            {
-                MessageBox.Show("Not Saved");
-            }
-
-            displayStockOut.Refresh();
-
-            reorderLevelTextBox.Text = "0";
-            reorderLevelTextBox.ReadOnly = true;
-
-            availableQuantityTextBox.Text = "0";
-            availableQuantityTextBox.ReadOnly = true;
-
-            companyComboBox.Enabled = false;
-            categoryComboBox.Enabled = false;
-
-        }
-
+        
         private void LostButton_Click(object sender, EventArgs e)
         {
-            int isExecuted =0;
-
-            for (int i = 0; i < displayStockOut.Rows.Count - 1; i++)
+            try
             {
-                stockOut.item_ID = item_IDs[i];
-                stockOut.stockout_quantity = Convert.ToInt32(displayStockOut.Rows[i].Cells[3].Value);
+                if (this.displayStockOut.DataSource == null)
+                {
+                    MessageBox.Show("Add Stock Out Items First!");
+                    return;
+                }
 
-                
-                isExecuted = _stockManager.InsertLost(stockOut);
-                
+                int isExecuted = 0;
+
+                for (int i = 0; i < displayStockOut.Rows.Count - 1; i++)
+                {
+                    stockOut.item_ID = item_IDs[i];
+                    stockOut.stockout_quantity = Convert.ToInt32(displayStockOut.Rows[i].Cells[3].Value);
+
+
+                    isExecuted = _stockManager.InsertLost(stockOut);
+
+                }
+
+                if (isExecuted > 0)
+                {
+                    MessageBox.Show("Saved As Lost Items");
+                }
+                else
+                {
+                    MessageBox.Show("Not Saved");
+                }
+
+               
+
+                reorderLevelTextBox.Text = "0";
+                reorderLevelTextBox.ReadOnly = true;
+
+                availableQuantityTextBox.Text = "0";
+                availableQuantityTextBox.ReadOnly = true;
+
+                stockOutQuantityTextBox.Clear();
+
+                companyComboBox.Enabled = false;
+                categoryComboBox.Enabled = false;
             }
 
-            if (isExecuted > 0)
+            catch (Exception exception)
             {
-                MessageBox.Show("Saved As Lost Items");
+                MessageBox.Show(exception.Message);
             }
-            else
-            {
-                MessageBox.Show("Not Saved");
-            }
-
-            displayStockOut.Refresh();
-
-            reorderLevelTextBox.Text = "0";
-            reorderLevelTextBox.ReadOnly = true;
-
-            availableQuantityTextBox.Text = "0";
-            availableQuantityTextBox.ReadOnly = true;
-
-            companyComboBox.Enabled = false;
-            categoryComboBox.Enabled = false;
 
         }
 
         private void DamageButton_Click(object sender, EventArgs e)
         {
-            int isExecuted = 0; ;
-
-            for (int i = 0; i < displayStockOut.Rows.Count - 1; i++)
+            try
             {
-                stockOut.item_ID = item_IDs[i];
-                stockOut.stockout_quantity = Convert.ToInt32(displayStockOut.Rows[i].Cells[3].Value);             
+                if (this.displayStockOut.DataSource == null)
+                {
+                    MessageBox.Show("Add Stock Out Items First!");
+                    return;
+                }
+                              
+
+                int isExecuted = 0; ;
+
+                for (int i = 0; i < displayStockOut.Rows.Count - 1; i++)
+                {
+                    stockOut.item_ID = item_IDs[i];
+                    stockOut.stockout_quantity = Convert.ToInt32(displayStockOut.Rows[i].Cells[3].Value);
 
 
-                isExecuted = _stockManager.InsertDamage(stockOut);
-                                
+                    isExecuted = _stockManager.InsertDamage(stockOut);
+
+                }
+
+                if (isExecuted > 0)
+                {
+                    MessageBox.Show("Saved As Damaged Items");
+                }
+                else
+                {
+                    MessageBox.Show("Not Saved");
+                }              
+
+                reorderLevelTextBox.Text = "0";
+                reorderLevelTextBox.ReadOnly = true;
+
+                availableQuantityTextBox.Text = "0";
+                availableQuantityTextBox.ReadOnly = true;
+
+                stockOutQuantityTextBox.Clear();
+
+                companyComboBox.Enabled = false;
+                categoryComboBox.Enabled = false;
             }
 
-            if (isExecuted > 0)
+            catch (Exception exception)
             {
-                MessageBox.Show("Saved As Damaged Items");
+                MessageBox.Show(exception.Message);
             }
-            else
-            {
-                MessageBox.Show("Not Saved");
-            }
-
-            reorderLevelTextBox.Text = "0";
-            reorderLevelTextBox.ReadOnly = true;
-
-            availableQuantityTextBox.Text = "0";
-            availableQuantityTextBox.ReadOnly = true;
-
-            companyComboBox.Enabled = false;
-            categoryComboBox.Enabled = false;
 
         }
 

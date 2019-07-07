@@ -64,14 +64,9 @@ INSERT INTO StockIn (item_ID, stockin_quantity,Date)
 VALUES (1,120, CONVERT(VARCHAR(10), getdate(), 103))
 
 
-CREATE VIEW StockInView
-AS
 SELECT Name AS Item, Date, stockin_quantity FROM StockIn  As s
-LEFT JOIN Item AS i ON i.ID = s.item_ID 
+LEFT JOIN Item AS i ON i.ID = s.item_ID ORDER BY s.ID DESC
 
-SELECT * FROM StockInView
-
----DROP VIEW StockInView---
 
 
 -- Stock Out Table --
